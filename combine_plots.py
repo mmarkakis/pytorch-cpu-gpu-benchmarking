@@ -13,9 +13,6 @@ def combine_plots(input_dirs, output_dir):
         if not os.path.exists(path):
             raise FileNotFoundError(f"Input directory {path} does not exist")
 
-    # Create the output directory
-    os.makedirs(output_dir, exist_ok=True)
-
     # Read in the results from each input directory
     results = {}
     for input_dir in input_dirs:
