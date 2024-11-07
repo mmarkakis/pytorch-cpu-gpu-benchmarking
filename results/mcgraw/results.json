@@ -1,0 +1,73 @@
+{
+    "experiments": [
+        {
+            "dimensionality_list": [
+                128,
+                256,
+                512,
+                1024,
+                2048
+            ],
+            "num_points_fixpoint": 10000,
+            "num_epochs_fixpoint": 10,
+            "cpu_times_dims": [
+                0.03490748405456543,
+                0.018213534355163576,
+                0.021021652221679687,
+                0.016311287879943848,
+                0.025429344177246092
+            ],
+            "gpu_times_dims": [
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "num_points_list": [
+                1000,
+                5000,
+                10000,
+                50000,
+                100000
+            ],
+            "dimensionality_fixpoint": 512,
+            "num_epochs_fixpoint": 10,
+            "cpu_times_points": [
+                0.0026412010192871094,
+                0.007043242454528809,
+                0.012191343307495116,
+                0.07606439590454102,
+                0.1333566427230835
+            ],
+            "gpu_times_points": [
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "num_epochs_list": [
+                5,
+                10,
+                20
+            ],
+            "dimensionality_fixpoint": 512,
+            "num_points_fixpoint": 10000,
+            "cpu_times_epochs": [
+                0.019060468673706053,
+                0.013869547843933105,
+                0.0136680006980896
+            ],
+            "gpu_times_epochs": [
+                null,
+                null,
+                null
+            ]
+        }
+    ]
+}
