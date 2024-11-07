@@ -5,6 +5,7 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import os
 from datetime import datetime
+import json
 
 
 # Define a simple neural network model
@@ -125,31 +126,40 @@ for num_epochs in num_epochs_list:
     gpu_times_epochs.append(gpu_time)
 
 
-# Save results as csv where each row has the following format:
-# input_dim,num_points,num_epochs,cpu_time,gpu_time
+# Save results as a json file
 exptime = datetime.now()
 os.makedirs(f"results/{exptime}/", exist_ok=True)
 
-with open(f"results/{exptime}/results.csv", "w") as f:
-    f.write("input_dim,num_points,num_epochs,cpu_time,gpu_time\n")
+with open(f"results/{exptime}/results.json", "w") as f:
 
-    for i, input_dim in enumerate(dimensionality_list):
-        f.write(
-            f"""{input_dim},{num_points_fixpoint},{num_epochs_fixpoint},"""
-            f"""{cpu_times_dims[i]},{gpu_times_dims[i]}\n"""
-        )
+    # Experiment 1
+    d = {
+        "experiments": [
+            {
+                "dimensionality_list": dimensionality_list,
+                "num_points_fixpoint": num_points_fixpoint,
+                "num_epochs_fixpoint": num_epochs_fixpoint,
+                "cpu_times_dims": cpu_times_dims,
+                "gpu_times_dims": gpu_times_dims,
+            },
+            {
+                "num_points_list": num_points_list,
+                "dimensionality_fixpoint": dimensionality_fixpoint,
+                "num_epochs_fixpoint": num_epochs_fixpoint,
+                "cpu_times_points": cpu_times_points,
+                "gpu_times_points": gpu_times_points,
+            },
+            {
+                "num_epochs_list": num_epochs_list,
+                "dimensionality_fixpoint": dimensionality_fixpoint,
+                "num_points_fixpoint": num_points_fixpoint,
+                "cpu_times_epochs": cpu_times_epochs,
+                "gpu_times_epochs": gpu_times_epochs,
+            },
+        ]
+    }
 
-    for i, num_points in enumerate(num_points_list):
-        f.write(
-            f"""{dimensionality_fixpoint},{num_points},{num_epochs_fixpoint},"""
-            f"""{cpu_times_points[i]},{gpu_times_points[i]}\n"""
-        )
-
-    for i, num_epochs in enumerate(num_epochs_list):
-        f.write(
-            f"""{dimensionality_fixpoint},{num_points_fixpoint},{num_epochs},"""
-            f"""{cpu_times_epochs[i]},{gpu_times_epochs[i]}\n"""
-        )
+    json.dump(d, f, indent=4)
 
 
 # Plotting
